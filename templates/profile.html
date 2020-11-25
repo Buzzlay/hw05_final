@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Профиль автора{% endblock %}
+{% block header %}Профиль автора{% endblock %}
+{% block content %}
+  <main role="main"
+        class="container">
+    <div class="row">
+      {% include 'profile_frame.html' %}
+      <div class="col-md-9">
+        <!-- Начало блока с отдельным постом -->
+        {% for post in page %}
+          {% include 'post_frame.html' with post=post %}
+        {% endfor %}
+        <!-- Конец блока с отдельным постом -->
+        <!-- Здесь постраничная навигация паджинатора -->
+        {% if page.has_other_pages %}
+          {% include "paginator.html" with items=page paginator=paginator %}
+        {% endif %}
+      </div>
+    </div>
+  </main>
+{% endblock %}

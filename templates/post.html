@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Пост автора{% endblock %}
+{% block header %}Оставить комментарий{% endblock %}
+{% block content %}
+  <main role="main"
+        class="container">
+    <div class="row">
+      {% include 'profile_frame.html' %}
+
+      <div class="col-md-9">
+          <!-- Пост -->
+        {% include 'post_frame.html' with post=post %}
+      </div>
+    </div>
+  </main>
+{% endblock %}
