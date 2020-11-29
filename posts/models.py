@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 User = get_user_model()
 
@@ -18,7 +18,10 @@ class Group(models.Model):
 
 
 class Post(models.Model):
-    text = models.TextField(verbose_name='Текст поста')
+    text = models.TextField(
+        help_text='Введите текст поста',
+        verbose_name='Текст поста'
+    )
     pub_date = models.DateTimeField(
         'date published',
         auto_now_add=True
@@ -34,11 +37,14 @@ class Post(models.Model):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
+        help_text='Введите название группы',
         verbose_name='Название группы'
     )
     image = models.ImageField(
         upload_to='posts/',
-        blank=True, null=True,
+        blank=True,
+        null=True,
+        help_text='Выберите картинку',
         verbose_name='Картинка')
 
     class Meta:
@@ -51,7 +57,7 @@ class Post(models.Model):
             f'Автор: {self.author}, ' 
             f'группа: {self.group}, ' 
             f'дата публикации: {self.pub_date}, ' 
-            f'начало поста:{self.text[:50]}...'
+            f'начало поста:{self.text[:15]}...'
         )
 
 
@@ -73,6 +79,7 @@ class Comment(models.Model):
     )
 
     class Meta:
+        ordering = ('-created',)
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
 
@@ -94,6 +101,9 @@ class Follow(models.Model):
             fields=['author', 'user'],
             name='following_unique'
         )
+
+        verbose_name = 'подписка'
+        verbose_name_plural = 'подписки'
 
     def __str__(self):
         return f'{self.user} - подписчик автора - {self.author}'

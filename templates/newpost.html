@@ -15,13 +15,12 @@
         {% endif %}
         <div class="card-body">
 
-            {% for error in form.errors %}
-              <div class="alert alert-danger"
-                   role="alert">
-                Ошибка в поле {{ error|escape }}.
-                Загрузите правильное изображение. Файл, который вы загрузили, поврежден или не является изображением.
-              </div>
-            {% endfor %}
+          {% for error in form.errors %}
+            <div class="alert alert-danger"
+                 role="alert">
+              Ошибка в поле {{ error|escape }}.
+            </div>
+          {% endfor %}
           <form method="post" enctype="multipart/form-data" action="
                 {% if post %}
                   {% url 'post_edit' post.author.username post.id %}
