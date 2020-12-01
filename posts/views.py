@@ -51,10 +51,7 @@ def profile(request, username):
     paginator = Paginator(author_posts, 10)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
-    if request.user.is_authenticated:
-        following = author.following.filter(user=request.user).exists()
-    else:
-        following = None
+    following = request.user.is_authenticated and author.following.filter(user=request.user).exists()
     return render(request, 'profile.html', {
         'author': author,
         'paginator': paginator,
@@ -145,7 +142,7 @@ def follow_index(request):
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     following = author.following.filter(user=request.user).exists()
-    if username != request.user.username and following is False:
+    if username != request.user.username and not following:
         Follow.objects.get_or_create(user=request.user, author=author)
     return redirect('profile', username)
 
