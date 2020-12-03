@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import cache_page
 
 from .forms import PostForm, CommentForm
@@ -42,6 +43,7 @@ def new_post(request):
     post = form.save(commit=False)
     post.author = request.user
     post.save()
+    cache.touch('index_page', 0)
     return redirect('index')
 
 
@@ -51,7 +53,9 @@ def profile(request, username):
     paginator = Paginator(author_posts, 10)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
-    following = request.user.is_authenticated and author.following.filter(user=request.user).exists()
+    following = request.user.is_authenticated and author.following.filter(
+        user=request.user
+    ).exists()
     return render(request, 'profile.html', {
         'author': author,
         'paginator': paginator,
@@ -85,6 +89,7 @@ def post_edit(request, username, post_id):
     )
     if form.is_valid():
         form.save()
+        cache.touch('index_page', 0)
         return redirect('post', username, post_id)
     return render(request, 'newpost.html', {
         'form': form,

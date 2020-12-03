@@ -109,7 +109,9 @@ class StaticURLTests(TestCase):
             text=POST_TEXT,
             group=self.GROUP
         )
-        follow = Follow.objects.create(author=self.SECOND_USER, user=self.USER)
+        follow = Follow.objects.create(
+            author=self.SECOND_USER,
+            user=self.USER)
         response_first = self.authorized_client.get(FOLLOW_INDEX)
         post_test = response_first.context['page'][0]
         posts_count = len(response_first.context['page'].object_list)
@@ -119,4 +121,3 @@ class StaticURLTests(TestCase):
         response_second = self.authorized_client.get(FOLLOW_INDEX)
         posts_count_sec = len(response_second.context['page'].object_list)
         self.assertEqual(posts_count_sec, 0)
-        self.assertNotEqual(response_first.context['page'], response_second.context['page'])
