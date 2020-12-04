@@ -19,6 +19,7 @@ SECRET_KEY = '5zc8dyucuw-a6yzznbu!fwpl+#dn6pynipl-7p=(o!s%3w7%l*'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "*",
     "localhost",
     "127.0.0.1",
     "[::1]",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +49,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1'
 ]
 
 ROOT_URLCONF = 'yatube.urls'
@@ -102,15 +109,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, './posts/static')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../posts/static')
 
+MEDIA_ROOT = os.path.join(BASE_DIR, './media')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Login
 
-LOGIN_URL = 'login' # "/auth/login/"
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "index"
 # LOGOUT_REDIRECT_URL = "index"
 

@@ -3,20 +3,21 @@ certifi==2020.11.8        # via requests
 chardet==3.0.4            # via requests
 django==3.1.4
 idna==2.10                 # via requests
-importlib_metadata==3.1.1  # via pluggy, pytest
-more_itertools==8.6.0     # via pytest
+importlib-metadata==3.1.1  # via pluggy, pytest
+more-itertools==8.6.0     # via pytest
 packaging==20.7           # via pytest
 pillow==8.0.1
 pluggy==0.13.1            # via pytest
 py==1.9.0                 # via pytest
 pyparsing==2.4.7          # via packaging
-pytest_django==4.1.0
+pytest-django==4.1.0
 pytest==6.1.2             # via pytest-django
 pytz==2020.4              # via django
 requests==2.25.0
 six==1.15.0               # via packaging
-sorl_thumbnail==12.7.0
+sorl-thumbnail==12.7.0
 sqlparse==0.4.1           # via django
 urllib3==1.26.2           # via requests
 wcwidth==0.2.5            # via pytest
 zipp==3.4.0               # via importlib-metadata
+django-debug-toolbar~=3.2
