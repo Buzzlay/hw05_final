@@ -17,7 +17,6 @@ __pycache__/
 
 media/
 
-db.sqlite3
 
 htmlcov/
 .coverage
