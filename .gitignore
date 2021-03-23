@@ -24,6 +24,3 @@ htmlcov/
 *.cover
 
 ngrok.exe
-/posts/static/
-/posts/media/
-/media/
