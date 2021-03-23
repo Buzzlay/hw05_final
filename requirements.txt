@@ -1,11 +1,11 @@
 attrs==20.3.0             # via pytest
-certifi==2020.11.8        # via requests
-chardet==3.0.4            # via requests
+certifi==2020.12.5        # via requests
+chardet==4.0.0            # via requests
 django==3.1.4
 idna==2.10                 # via requests
 importlib-metadata==3.1.1  # via pluggy, pytest
 more-itertools==8.6.0     # via pytest
-packaging==20.7           # via pytest
+packaging==20.8           # via pytest
 pillow==8.0.1
 pluggy==0.13.1            # via pytest
 py==1.9.0                 # via pytest
@@ -21,3 +21,7 @@ urllib3==1.26.2           # via requests
 wcwidth==0.2.5            # via pytest
 zipp==3.4.0               # via importlib-metadata
 django-debug-toolbar~=3.2
+python-dotenv==0.15.0
+djangorestframework==3.12.2
+markdown==3.3.3
+django-filter==2.4.0

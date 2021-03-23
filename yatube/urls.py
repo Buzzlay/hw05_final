@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.flatpages import views
+from django.contrib.flatpages.views import flatpage
 from django.conf import settings
 from django.conf.urls import handler404, handler500 # noqa
 from django.conf.urls.static import static
@@ -23,19 +23,19 @@ urlpatterns = [
 
 urlpatterns += [
     path('about/about-us/',
-         views.flatpage,
+         flatpage,
          {'url': 'about/about-us/'},
          name='about'),
     path('about/terms/',
-         views.flatpage,
+         flatpage,
          {'url': 'about/terms/'},
          name='terms'),
     path('about/about-author/',
-         views.flatpage,
+         flatpage,
          {'url': 'about/about-author/'},
          name='about-author'),
     path('about/about-spec/',
-         views.flatpage,
+         flatpage,
          {'url': 'about/about-spec/'},
          name='about-spec'),
 ]

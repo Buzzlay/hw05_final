@@ -3,6 +3,8 @@ from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.cache import cache_page
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .forms import PostForm, CommentForm
 from .models import Post, Follow, Group, User
@@ -158,3 +160,10 @@ def profile_unfollow(request, username):
     unfollow = get_object_or_404(Follow, user=request.user, author=author)
     unfollow.delete()
     return redirect('profile', username)
+
+
+@api_view(['GET', 'POST'])
+def obtain_auth_token(request):
+    if request.method == 'POST':
+        return Response({'message': f'Привет {request.data}'})
+    return Response({'message': 'Привет, мир!'})
