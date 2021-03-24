@@ -10,7 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import environ
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://8f69f9be06294151ac733fbd82c9f372@o557808.ingest.sentry.io/5690530",
+    integrations=[DjangoIntegration()],
+
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
+
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,6 +38,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "178.154.192.129",
     "localhost",
+    "instascribe.ga",
+    "www.instascribe.ga",
 ]
 
 INSTALLED_APPS = [
@@ -76,10 +95,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'yatube.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db(),
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -142,3 +158,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
